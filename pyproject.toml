@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "fastapi-project"
+version = "0.1.0"
+description = ""
+authors = ["Nikukusik <nikukusika@hmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.111.1"
+unicorn = "^2.0.1.post1"
+sqlalchemy = "^2.0.31"
+pydentic = "^0.0.1.dev3"
+psycopg2 = "^2.9.9"
+alembic = "^1.13.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

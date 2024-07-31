@@ -32,8 +32,12 @@ def delete_by_id(id: int, db:Session = Depends(get_db)):
     repo = UsersRepository(db)
     return repo.delete_by_id(id)
 
-@router.put("/user_id", response_model=UsersResponse)
+@router.put("/{user_id}", response_model=UsersResponse)
 def update_by_id(body: UsersUpdate, id: int, db:Session = Depends(get_db)):
     repo = UsersRepository(db)
     return repo.update_by_id(body, id)
 
+@router.get("/birthdays", response_model=UsersResponse)
+def get_upcoming_birthdays(db:Session = Depends(get_db)):
+    repo = UsersRepository(db)
+    return repo.get_upcoming_birthdays()

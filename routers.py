@@ -22,6 +22,10 @@ def search(query: str, db:Session = Depends(get_db)):
     repo = UsersRepository(db)
     return repo.search(query)
 
+@router.get("/birthdays", response_model=list[UsersResponse])
+def get_upcoming_birthdays(db:Session = Depends(get_db)):
+    repo = UsersRepository(db)
+    return repo.get_upcoming_birthdays()
 @router.get("/{user_id}", response_model=UsersResponse)
 def search_by_id(id: int, db:Session = Depends(get_db)):
     repo = UsersRepository(db)
@@ -37,7 +41,3 @@ def update_by_id(body: UsersUpdate, id: int, db:Session = Depends(get_db)):
     repo = UsersRepository(db)
     return repo.update_by_id(body, id)
 
-@router.get("/birthdays", response_model=UsersResponse)
-def get_upcoming_birthdays(db:Session = Depends(get_db)):
-    repo = UsersRepository(db)
-    return repo.get_upcoming_birthdays()

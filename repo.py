@@ -1,5 +1,5 @@
 
-from sqlalchemy import select
+from sqlalchemy import select, func
 
 from models import Users
 from sqlalchemy.orm import Session
@@ -63,30 +63,17 @@ class UsersRepository:
         results = self.session.execute(query)
         users = results.scalars().all()
         tdate = dtdt.today().date()
-        birthdays = []
+        users_with_bth = []
         for user in users:
-            bdate = user["birthday"]
-            bdate = dtdt.strptime(bdate, "%Y-%m-%d").date()
+            bdate = user.birthday
             year_now = dtdt.today().year
             bdate = bdate.replace(year=year_now)
-            week_day = bdate.isoweekday()
             days_between = (bdate - tdate).days
             if 0 <= days_between < 7:
-                if week_day < 6:
-                    birthdays.append({"name": user["name"], 'congratulation_date': bdate.strftime("%Y-%m-%d")})
-                else:
-                    if (bdate + dt.timedelta(days=1)).weekday() == 0:
-                        birthdays.append({'name': user['name'],
-                                          'congratulation_date': (bdate + dt.timedelta(days=1)).strftime("%Y-%m-%d")})
-                    elif (bdate + dt.timedelta(days=2)).weekday() == 0:
-                        birthdays.append({'name': user['name'],
-                                          'congratulation_date': (bdate + dt.timedelta(days=2)).strftime("%Y-%m-%d")})
-        users = []
-        if birthdays:
-            for birthday in birthdays:
-                users.append(self.search(birthday.get("name")))
-            return users
-        return results.scalars().first()
+                users_with_bth.append(user)
+        if users_with_bth:
+            return users_with_bth
+
 
 
 

@@ -4,25 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="55e1b500-65ce-46cc-92e2-a2e15db05142" name="Changes" comment="done">
-      <change afterPath="$PROJECT_DIR$/config/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/auth/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/auth/repo.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/auth/routers.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/auth/schema.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/auth/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+    <list default="true" id="55e1b500-65ce-46cc-92e2-a2e15db05142" name="Changes" comment="first_commit">
+      <change afterPath="$PROJECT_DIR$/alembic/versions/976bc2c8c6d9_add_users_app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alembic/env.py" beforeDir="false" afterPath="$PROJECT_DIR$/alembic/env.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/db.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/contacts/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/poetry.lock" beforeDir="false" afterPath="$PROJECT_DIR$/poetry.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repo.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/contacts/repo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routers.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/contacts/routers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/schema.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/contacts/schema.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/auth/repo.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/repo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/auth/routers.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/routers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/auth/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/contacts/repo.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/contacts/repo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/contacts/routers.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/contacts/routers.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -141,13 +130,22 @@
       <option name="project" value="LOCAL" />
       <updated>1722427542734</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="first_commit">
+      <option name="closed" value="true" />
+      <created>1722685771995</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1722685771995</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first" />
     <MESSAGE value="second" />
     <MESSAGE value="done" />
-    <option name="LAST_COMMIT_MESSAGE" value="done" />
+    <MESSAGE value="first_commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="first_commit" />
   </component>
 </project>

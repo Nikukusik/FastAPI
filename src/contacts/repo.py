@@ -14,7 +14,7 @@ class UsersRepository:
         self.session = session
 
     def get_contacts(self, current_user_id: int, limit: int=10, offset: int=0):
-        query = select(Users).where(Users.owner_id == current_user_id).offset(offset).limit(limit)
+        query = select(Users).filter_by(owner_id=current_user_id).offset(offset).limit(limit)
         results = self.session.execute(query)
         return results.scalars().all()
 

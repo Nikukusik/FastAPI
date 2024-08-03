@@ -17,7 +17,7 @@ class UsersRepository:
         self.session.commit()
         self.session.refresh(new_user)
         return new_user
-    def get_user_by_email(self, email):
+    def get_user_by_email(self, email: str):
         q = select(Users_app).where(Users_app.email == email)
         res = self.session.execute(q)
         return res.scalar_one_or_none()

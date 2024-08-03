@@ -13,7 +13,7 @@ router = APIRouter()
 @router.get("/", response_model=list[UsersResponse])
 def get_users(current_user: Users_app = Depends(get_current_user), limit: int=10, offset: int=0, db:Session = Depends(get_db)):
     repo = UsersRepository(db)
-    return repo.get_contacts(limit, offset, current_user.id)
+    return repo.get_contacts(current_user.id, limit, offset)
 
 @router.post("/", response_model=UsersResponse)
 def create_users(user: UsersCreate, current_user: Users_app = Depends(get_current_user), db:Session = Depends(get_db)):

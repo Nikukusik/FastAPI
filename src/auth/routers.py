@@ -1,18 +1,17 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Security
 from fastapi.responses import JSONResponse
-from fastapi.security import OAuth2PasswordBearer
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 from starlette import status
 
-from src.auth.utils import verify_password, create_access_token, create_refresh_token, decode_access_token, \
-    OAuth2PasswordRequestFormEmail
+from src.auth.utils import verify_password, create_access_token, create_refresh_token, decode_access_token
 
 from config.db import get_db
 from src.auth.repo import UsersRepository
 from src.auth.schema import UserResponse, Token, UserCreate
 
 router = APIRouter()
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/token")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="users_app/token")
 
 @router.post("/register")
 def register(user_create: UserCreate, db: Session = Depends(get_db)):
@@ -24,9 +23,9 @@ def register(user_create: UserCreate, db: Session = Depends(get_db)):
 
 
 @router.post("/token", response_model=Token)
-def login_for_token(form_data: OAuth2PasswordRequestFormEmail = Depends(), db: Session = Depends(get_db)):
+def login_for_token(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
     repo = UsersRepository(db)
-    user = repo.get_user_by_email(form_data.email)
+    user = repo.get_user_by_email(form_data.username)
     if not user or not verify_password(user.hashed_password, form_data.password):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -41,9 +40,6 @@ def login_for_token(form_data: OAuth2PasswordRequestFormEmail = Depends(), db: S
         "token_pype": "bearer",
     })
 
-@router.post("/refresh", response_model=Token)
-def refresh_token():
-    pass
 
 
 def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)) -> UserResponse:

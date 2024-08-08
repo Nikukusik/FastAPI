@@ -1,26 +1,32 @@
 from datetime import timedelta, timezone
 from datetime import datetime as dtdt
-from typing import Union
 
-from fastapi import Form
-from fastapi.security import OAuth2PasswordRequestForm
 from jose import jwt, JWTError
 from passlib.context import CryptContext
-from dotenv import load_dotenv
-from os import getenv
 
-from typing_extensions import Doc, Annotated
 
 from src.auth.schema import TokenData
 
-load_dotenv()
-
-SECRET_KEY = getenv("SECRET_KEY")
-ALGORITHM = getenv("ALGORITHM")
-ACCESS_TOKEN_EXPIRE_MINUTES = getenv("ACCESS_TOKEN_EXPIRE_MINUTES")
-REFRESH_TOKEN_EXPIRE_DAYS = getenv("REFRESH_TOKEN_EXPIRE_DAYS")
+from config.general import SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES, REFRESH_TOKEN_EXPIRE_DAYS, VERIFICATION_TOKEN_EXPIRE_HOURS
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
+def create_verification_token(email: str) -> str:
+    expire = dtdt.now(timezone.utc) + timedelta(hours=int(VERIFICATION_TOKEN_EXPIRE_HOURS))
+    to_encode = {"exp": expire, "sub": email}
+    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+    return encoded_jwt
+
+def decode_verification_token(token: str) -> str | None:
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        email: str = payload.get("sub")
+        if email is None:
+            return None
+        return email
+    except JWTError:
+        return None
+
 
 def get_password_hash(password: str) -> str:
     return pwd_context.hash(password)

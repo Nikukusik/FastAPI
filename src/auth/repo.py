@@ -12,7 +12,7 @@ class UsersRepository:
 
     def create_user(self, user_create: UserCreate):
         hashed_password = get_password_hash(user_create.password)
-        new_user = Users_app(email=user_create.email, hashed_password=hashed_password)
+        new_user = Users_app(email=user_create.email, hashed_password=hashed_password, verification=False)
         self.session.add(new_user)
         self.session.commit()
         self.session.refresh(new_user)
@@ -21,3 +21,16 @@ class UsersRepository:
         q = select(Users_app).where(Users_app.email == email)
         res = self.session.execute(q)
         return res.scalar_one_or_none()
+
+    def activate_user(self, user: Users_app):
+        user.verification = True
+        self.session.add(user)
+        self.session.commit()
+        self.session.refresh(user)
+
+    def update_avatar(self, email, url: str):
+        user = self.get_user_by_email(email)
+        user.avatar = url
+        self.session.add(user)
+        self.session.commit()
+        self.session.refresh(user)

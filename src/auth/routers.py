@@ -83,7 +83,7 @@ def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(
 
 
 @router.patch('/avatar', response_model=UserResponse)
-async def update_avatar_user(file: UploadFile = File(), current_user: Users_app = Depends(get_current_user),
+def update_avatar_user(file: UploadFile = File(), current_user: Users_app = Depends(get_current_user),
                              db: Session = Depends(get_db)):
     repo = UsersRepository(db)
     cloudinary.config(
@@ -96,5 +96,5 @@ async def update_avatar_user(file: UploadFile = File(), current_user: Users_app 
     r = cloudinary.uploader.upload(file.file, public_id=f'NotesApp/{current_user.email}', overwrite=True)
     src_url = cloudinary.CloudinaryImage(f'NotesApp/{current_user.email}')\
                         .build_url(width=250, height=250, crop='fill', version=r.get('version'))
-    user = await repo.update_avatar(current_user.email, src_url)
+    user = repo.update_avatar(current_user.email, src_url)
     return user

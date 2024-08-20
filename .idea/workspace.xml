@@ -4,16 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="55e1b500-65ce-46cc-92e2-a2e15db05142" name="Changes" comment="second_commit">
-      <change afterPath="$PROJECT_DIR$/tests/conftest.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/test_repo_functions.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/test_route_auth.py" afterDir="false" />
+    <list default="true" id="55e1b500-65ce-46cc-92e2-a2e15db05142" name="Changes" comment="third_commit">
+      <change afterPath="$PROJECT_DIR$/tests/test_auth.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/general.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/general.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/poetry.lock" beforeDir="false" afterPath="$PROJECT_DIR$/poetry.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/auth/repo.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/repo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/auth/routers.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/routers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/conftest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_repo_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_repo_functions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_route_auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/__init__.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,10 +66,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\code\python\python_web\FastApi_project\tests" />
+      <recent name="D:\code\python\python_web\FastApi_project\tests\pytest" />
+      <recent name="D:\code\python\python_web\FastApi_project\tests\Unittest" />
       <recent name="D:\code\python\python_web\FastApi_project\src" />
       <recent name="D:\code\python\python_web\FastApi_project\src\contacts" />
-      <recent name="D:\code\python\python_web\FastApi_project" />
-      <recent name="D:\code\python\python_web\FastApi_project\config" />
     </key>
   </component>
   <component name="RunManager">
@@ -168,7 +169,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723223867867</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="third_commit">
+      <option name="closed" value="true" />
+      <created>1724054599293</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1724054599293</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -177,6 +186,7 @@
     <MESSAGE value="first_commit" />
     <MESSAGE value="done" />
     <MESSAGE value="second_commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="second_commit" />
+    <MESSAGE value="third_commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="third_commit" />
   </component>
 </project>

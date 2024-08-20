@@ -36,7 +36,7 @@ def register(user_create: UserCreate, background_tasks: BackgroundTasks, db: Ses
     background_tasks.add_task(send_verification, user.email, body)
     return JSONResponse(status_code=status.HTTP_201_CREATED, content={"email": user.email})
 
-@router.get("/verify_email")
+@router.post("/verify_email")
 def verify_email(token: str, db: Session = Depends(get_db)):
     email: str = decode_verification_token(token)
     repo = UsersRepository(db)

@@ -4,14 +4,15 @@ from sqlalchemy.orm import sessionmaker, Session
 from faker import Faker
 
 
-import config.general
-from config.db import Base
+from config.general import DATABASE_TEST_URL
+from config.db import Base, get_db
+from main import app
 from src.auth.models import Users_app
-from src.auth.utils import get_password_hash
+from src.auth.utils import get_password_hash, create_access_token, create_refresh_token
 
-fake = Faker
+fake = Faker()
 
-engine = create_engine(config.general.DATABASE_TEST_URL, echo=True)
+engine = create_engine(DATABASE_TEST_URL, echo=True)
 SessionLocal = sessionmaker(autoflush=False, autocommit=False, bind=engine)
 
 
@@ -19,11 +20,11 @@ SessionLocal = sessionmaker(autoflush=False, autocommit=False, bind=engine)
 @pytest.fixture(scope="function", autouse=True)
 def setup_db():
     with engine.begin() as conn:
-        conn.run_sync(Base.metadata.drop_all)
-        conn.run_sync(Base.metadata.create_all)
+        Base.metadata.drop_all(bind=conn)
+        Base.metadata.create_all(bind=conn)
     yield
     with engine.begin() as conn:
-        conn.run_sync(Base.metadata.drop_all)
+        Base.metadata.drop_all(bind=conn)
 
 @pytest.fixture(scope='function')
 def db_session(setup_db):
@@ -31,15 +32,38 @@ def db_session(setup_db):
         yield session
 
 @pytest.fixture(scope='function')
-def test_password():
+def user_password():
     return fake.password()
 
 @pytest.fixture(scope='function')
-def create_user(db: Session, test_password):
-    hashed_password = get_password_hash(test_password)
-    user_create = Users_app(email=fake.email, hashed_password=hashed_password)
-    new_user = Users_app(email=user_create.email, hashed_password=user_create.hashed_password, verification=True)
-    db.add(new_user)
-    db.commit()
-    db.refresh(new_user)
+def create_user(db_session: Session, user_password):
+    hashed_password = get_password_hash(user_password)
+    new_user = Users_app(
+        email=fake.email(),
+        hashed_password=hashed_password,
+        verification=True)
+    db_session.add(new_user)
+    db_session.commit()
+    db_session.refresh(new_user)
     return new_user
+
+@pytest.fixture(scope='function')
+def override_get_db(db_session):
+    def _get_db():
+        with db_session as session:
+            yield session
+    app.dependency_overrides[get_db] = _get_db
+    yield
+    app.dependency_overrides.clear()
+
+@pytest.fixture(scope='function')
+def auth_headers(create_user):
+    access_token = create_access_token(data={"sub": create_user.email})
+    headers = {
+        "Authorization": f"Bearer {access_token}"
+    }
+    return headers
+
+@pytest.fixture(scope="function")
+def token(create_user):
+    return create_access_token(data={"sub": create_user.email})
